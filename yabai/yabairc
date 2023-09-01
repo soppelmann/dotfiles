@@ -1,0 +1,52 @@
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+SPACEBAR_HEIGHT=$(spacebar -m config height)
+yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
+
+# disable window shadows for all windows
+yabai -m config window_shadow off
+
+# toggle shadows when a window is created for system prefs or preview
+yabai -m signal --add event=window_created  app='^(System Preferences|Preview)$' \
+    action='yabai -m window "${YABAI_WINDOW_ID}" --toggle shadow'
+
+# toggle shadows for all existing system prefs or preview windows when yabai launches
+yabai -m query --windows \
+    | jq '.[] | select(.shadow == 0 and (.app == "System Preferences" or .app == "Preview")).id' \
+    | xargs -I{} yabai -m window {} --toggle shadow
+
+# Disable rounded corners and add nice borders
+
+#yabai -m config window_topmost on
+#yabai -m config focus_follows_mouse autofocus
+#yabai -m config mouse_follows_focus on
+
+
+# Floating window problem at the top
+#yabai -m config window_topmost               on
+# yabai -m config window_shadow                float
+
+# global settings
+#yabai -m config mouse_follows_focus          off
+#yabai -m config focus_follows_mouse          on
+#yabai -m config window_topmost               off
+#yabai -m config window_opacity               on
+# yabai -m config window_shadow                off
+#yabai -m config window_border                on
+#yabai -m config window_border_width          4
+#yabai -m config active_window_border_color   0xffd75d74
+#yabai -m config normal_window_border_color   0xff000000
+#yabai -m config insert_window_border_color   0xffd75f5f
+
+
+
+# .. more yabai startup stuff
