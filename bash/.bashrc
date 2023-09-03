@@ -31,7 +31,8 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 #[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-local_ip=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2)
+# local_ip=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\  -f2)
+local_ip=$(hostname)
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
