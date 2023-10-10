@@ -44,6 +44,15 @@ bindkey -e
 #Matlab
 alias matlab='/Applications/MATLAB_R2022a.app/bin/matlab -nodesktop -nosplash $*'
 
+# enable direnv
+eval "$(direnv hook zsh)"
+
+export DIRENV_LOG_FORMAT=
+
+#_direnv_hook() {
+#  eval "$(direnv export zsh 2> >( egrep -v -e '^direnv: (loading|export|unloading)' ))"
+#};
+
 # i'm too lazy to type these out
 # alias emacs='emacs -nw'
 alias btop='bpytop'
@@ -183,7 +192,7 @@ source ~/.config/powerlevel10k/p10k.zsh
  fi
  # End Nix
 
-export CFLAGS='-Wall -Werror -Wextra'
+#export CFLAGS='-Wall -Werror -Wextra'
  
 # ccc: cc with filename
 function ccc() {
