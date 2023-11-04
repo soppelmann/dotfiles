@@ -185,7 +185,7 @@ source ~/.config/powerlevel10k/p10k.zsh
 
 #profiling
 #zprof
- 
+
  # Nix
  if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
     . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
@@ -193,22 +193,27 @@ source ~/.config/powerlevel10k/p10k.zsh
  # End Nix
 
 #export CFLAGS='-Wall -Werror -Wextra'
- 
+
+# asm: print asm to stdout
+function asm() {
+    ${CC} -S $1 -o /dev/stdout | grep -v '\.'
+        }
+
 # ccc: cc with filename
 function ccc() {
     file=$(basename "$1" .c)
         cc ${CFLAGS} -o "$file" "$1"
         }
-        
+
 function cxx() {
     file=$(basename "$1" .cpp)
         c++ -o "$file" "$1"
         }
 
 if [ -n "$INSIDE_EMACS" ]; then
-  chpwd() { print -P "\033AnSiTc %d" }
-  print -P "\033AnSiTu %n"
-  print -P "\033AnSiTc %d"
+#  chpwd() { print -P "\033AnSiTc %d" }
+#  print -P "\033AnSiTu %n"
+#  print -P "\033AnSiTc %d"
 fi
 
 if [ -n "$INSIDE_EMACS" ]; then
@@ -237,4 +242,3 @@ function tat {
 # setup ctrl + arrows
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
-
