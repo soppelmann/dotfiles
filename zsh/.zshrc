@@ -144,6 +144,8 @@ WATCHFMT="%B%n%b %a %l at %@"
 limit coredumpsize 0                 # don't know why you'd want anything else
 umask 022                            # be nice
 
+alias __git_ps1="git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/(\1)/'"
+
 # https://superuser.com/questions/458906
 __git_files () {
     _wanted files expl 'local files' _files
