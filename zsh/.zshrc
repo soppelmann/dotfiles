@@ -4,21 +4,50 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+
+
+if [[ $OSTYPE = darwin* ]]; then
+    if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+        source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    fi
+    #
+    #Add to path in /etc/paths
+    export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+    #Matlab
+    alias matlab='/Applications/MATLAB_R2022a.app/bin/matlab -nodesktop -nosplash $*'
+    source ~/.config/zsh/plugins/nix-shell/nix-shell.plugin.zsh
+    alias enablemamba='eval $__conda_setup'
+    export PATH="/opt/homebrew/Caskroom/mambaforge/base/bin:$PATH"
+    . "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
+    __conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    #C++ clang path
+    export CC=/usr/bin/clang
+    export CXX=/usr/bin/clang++
+
+    # ruby enable
+    eval "$(rbenv init - zsh)"
+
+    # opam configuration
+    [[ ! -r /Users/getz/.opam/opam-init/init.zsh ]] || source /Users/getz/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+    #p10k
+    source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
+    source ~/.config/powerlevel10k/p10k.zsh
+
+
+    #profiling
+    #zprof
+
+    # Nix
+    if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    fi
+    # End Nix
 fi
 
 
-#
-#Add to path in /etc/paths
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-
 #Fix TERM
 export TERM=xterm-256color
-
-#C++ clang path
-export CC=/usr/bin/clang
-#export CXX=/usr/bin/clang++
 
 # environment variables
 export BLOCKSIZE=1k
@@ -41,9 +70,6 @@ fi
 # emacs style for control+a/e, etc.
 bindkey -e
 
-#Matlab
-alias matlab='/Applications/MATLAB_R2022a.app/bin/matlab -nodesktop -nosplash $*'
-
 # enable direnv
 eval "$(direnv hook zsh)"
 
@@ -59,7 +85,7 @@ alias btop='bpytop'
 alias calc='perl -pe "print eval(\$_) . chr(10);"'
 alias cdu="cvs -q diff -upRN"
 alias cp="cp -i"
-#alias gs="git status"
+alias gst="git status"
 alias jobs="jobs -p"
 alias k9="kill -9 %1"
 alias ll="ls -alF"
@@ -154,10 +180,8 @@ bindkey '^e' edit-command-line
 # Plugins
 source ~/.config/zsh/plugins/zsh-autosuggestions.zsh
 #source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.config/zsh/plugins/nix-shell/nix-shell.plugin.zsh
 source ~/.config/zsh/plugins/fzf.zsh
 source ~/.config/zsh/plugins/sudo.zsh
-
 
 #case insensitive completion
 #zstyle ':completion:*' menu select matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
@@ -167,33 +191,7 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 
 autoload -Uz compinit && compinit
 
-alias enablemamba='eval $__conda_setup'
-export PATH="/opt/homebrew/Caskroom/mambaforge/base/bin:$PATH"
-. "/opt/homebrew/Caskroom/mambaforge/base/etc/profile.d/mamba.sh"
-__conda_setup="$('/opt/homebrew/Caskroom/mambaforge/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-
-# ruby enable
-eval "$(rbenv init - zsh)"
-
-# opam configuration
-[[ ! -r /Users/getz/.opam/opam-init/init.zsh ]] || source /Users/getz/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-#p10k
-source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
-source ~/.config/powerlevel10k/p10k.zsh
-
-
-#profiling
-#zprof
-
- # Nix
- if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
- fi
- # End Nix
-
-#export CFLAGS='-Wall -Werror -Wextra'
-
+export CFLAGS='-Wall -Werror -Wextra'
 # asm: print asm to stdout
 function asm() {
     ${CC} -S $1 -o /dev/stdout | grep -v '\.'
@@ -222,7 +220,6 @@ if [ -n "$INSIDE_EMACS" ]; then
     }
 fi
 
-
 # tat: tmux attach
 function tat {
   name=$(basename `pwd` | sed -e 's/\.//g')
@@ -235,9 +232,6 @@ function tat {
     tmux new-session -s "$name"
   fi
 }
-
-
-
 
 # setup ctrl + arrows
 bindkey "^[[1;5C" forward-word
