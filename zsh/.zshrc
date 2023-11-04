@@ -71,7 +71,9 @@ fi
 bindkey -e
 
 # enable direnv
-eval "$(direnv hook zsh)"
+if [[ -x direnv ]]; then
+   eval "$(direnv hook zsh)"
+fi
 
 export DIRENV_LOG_FORMAT=
 
@@ -180,7 +182,8 @@ bindkey '^e' edit-command-line
 # Plugins
 source ~/.config/zsh/plugins/zsh-autosuggestions.zsh
 #source ~/.config/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.config/zsh/plugins/fzf.zsh
+source ~/.config/zsh/plugins/completion.zsh
+source ~/.config/zsh/plugins/key-bindings.zsh
 source ~/.config/zsh/plugins/sudo.zsh
 
 #case insensitive completion
