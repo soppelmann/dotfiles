@@ -208,6 +208,80 @@ function cxx() {
         c++ -o "$file" "$1"
         }
 
+# asm: print asm to stdout
+function asm() {
+    ${CC} -S $1 -o /dev/stdout | grep -v '\.'
+        }
+
+# go back n directories
+function b {
+    str=""
+    count=0
+    while [ "$count" -lt "$1" ];
+    do
+        str=$str"../"
+        let count=count+1
+    done
+    cd $str
+}
+
+# extract files: depends on zip, unrar and p7zip
+function ex {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via ex()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+
+# mkdir && cd
+function mkcd {
+  mkdir -p "$1" && cd "$1";
+}
+
+# repeat command
+function repeat() {
+  number=$1
+  shift
+  for n in $(seq $number); do
+    if ! $@; then
+      echo "Sorry, something failed!"
+      return 1
+    fi
+  done
+  return 0
+}
+
+# find and edit, replace vim with editor
+function find_and_edit () {
+  if test -d .git
+  then
+    SOURCE="$(git ls-files)"
+  else
+    SOURCE="$(find . -type f)"
+  fi
+  files="$(fzf --preview='bat --color=always --paging=never --style=changes {} | head -$FZF_PREVIEW_LINES' --select-1 --multi --query="$@" <<< "$SOURCE")"
+  if [[ "$?" != "0" ]]
+  then
+    return 1
+  fi
+  vim $files
+}
+
+
 if [ -n "$INSIDE_EMACS" ]; then
 #  chpwd() { print -P "\033AnSiTc %d" }
 #  print -P "\033AnSiTu %n"
