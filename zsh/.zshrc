@@ -43,6 +43,8 @@ if [[ $OSTYPE = darwin* ]]; then
         . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
     fi
     # End Nix
+elif then
+    source ~/.config/zsh/prompt.zsh
 fi
 
 
