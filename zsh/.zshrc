@@ -114,7 +114,8 @@ fi
 setopt noclobber                     # halp me
 setopt nohup                         # don't kill things when i logout
 setopt print_exit_value              # i want to know if something went wrong
-HISTFILE=~/.zsh_history
+HISTFILE=~/.HISTFILE
+HISTSIZE=10000
 SAVEHIST=10000
 HISTSIZE=10000
 TMOUT=0                              # don't auto logout
