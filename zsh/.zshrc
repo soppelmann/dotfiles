@@ -161,6 +161,11 @@ upload() {
     curl -F $a https://envs.sh/
 }
 
+dfupload() {
+    if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
+    scp $1 getz@elaine.df.lth.se:~/UPLOADS/
+}
+
 # os-specific tweaks
 
 export STORE_LASTDIR=1
@@ -210,6 +215,13 @@ function ccc() {
     file=$(basename "$1" .c)
         cc ${CFLAGS} -o "$file" "$1"
         }
+
+# ccdb: cc with filename for debugging
+function ccdb() {
+    file=$(basename "$1" .c)
+        cc -g -lm -o "$file" "$1"
+        }
+
 
 function cxx() {
     file=$(basename "$1" .cpp)
