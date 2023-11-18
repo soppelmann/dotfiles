@@ -219,7 +219,7 @@ function ccc() {
 # ccdb: cc with filename for debugging
 function ccdb() {
     file=$(basename "$1" .c)
-        cc -g -lm -o "$file" "$1"
+        cc -g -o "$file" "$1" -lm
         }
 
 
