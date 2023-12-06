@@ -29,7 +29,7 @@ has_program direnv && eval "$(direnv hook bash)"
 
 ## Utilities
 
-export CFLAGS='-Wall -Werror -Wextra'
+# export CFLAGS='-Wall -Werror -Wextra'
 
 # asm: print asm to stdout
 function asm() {
@@ -125,7 +125,10 @@ function upload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
     curl -F $a https://envs.sh/
 }
-
+dfupload() {
+    if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
+    scp $1 getz@smocke.df.lth.se:~/UPLOADS/
+}
 
 # If not running interactively, don't do anything
 case $- in

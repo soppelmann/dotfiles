@@ -163,7 +163,7 @@ upload() {
 
 dfupload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    scp $1 getz@elaine.df.lth.se:~/UPLOADS/
+    scp $1 getz@smocke.df.lth.se:~/UPLOADS/
 }
 
 # os-specific tweaks
