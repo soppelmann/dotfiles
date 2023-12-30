@@ -29,22 +29,31 @@ has_program direnv && eval "$(direnv hook bash)"
 
 ## Utilities
 
+
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
 # export CFLAGS='-Wall -Werror -Wextra'
 
 # asm: print asm to stdout
 function asm() {
-    ${CC} -S $1 -o /dev/stdout | grep -v '\.'
+    ${CC} ${CFLAGS} -S "$1" -o /dev/stdout | grep -v '\.'
         }
 
 # ccc: cc with filename
 function ccc() {
     file=$(basename "$1" .c)
-        cc ${CFLAGS} -o "$file" "$1"
+        ${CC} ${CFLAGS} -o "$file" "$1"
         }
 
 function cxx() {
     file=$(basename "$1" .cpp)
-        c++ -o "$file" "$1"
+        ${CXX} -o "$file" "$1"
+        }
+
+# ccdb: cc with filename for debugging
+function ccdb() {
+    file=$(basename "$1" .c)
+        gcc -g -o "$file" "$1" -lm
         }
 
 
