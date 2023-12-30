@@ -204,10 +204,10 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 
 autoload -Uz compinit && compinit
 
-export CFLAGS='-Wall -Werror -Wextra'
+# export CFLAGS='-Wall -Werror -Wextra'
 # asm: print asm to stdout
 function asm() {
-    ${CC} -S $1 -o /dev/stdout | grep -v '\.'
+    ${CC} ${CFLAGS} -S $1 -o /dev/stdout | grep -v '\.'
         }
 
 # ccc: cc with filename
