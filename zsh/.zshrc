@@ -204,33 +204,30 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 
 autoload -Uz compinit && compinit
 
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+
 # export CFLAGS='-Wall -Werror -Wextra'
 # asm: print asm to stdout
 function asm() {
-    ${CC} ${CFLAGS} -S $1 -o /dev/stdout | grep -v '\.'
+    ${CC} ${CFLAGS} -S "$1" -o /dev/stdout | grep -v '\.'
         }
 
 # ccc: cc with filename
 function ccc() {
     file=$(basename "$1" .c)
-        cc ${CFLAGS} -o "$file" "$1"
+        ${CC} ${CFLAGS} -o "$file" "$1"
         }
 
 # ccdb: cc with filename for debugging
 function ccdb() {
     file=$(basename "$1" .c)
-        cc -g -o "$file" "$1" -lm
+        ${CC} -g -o "$file" "$1" -lm
         }
-
 
 function cxx() {
     file=$(basename "$1" .cpp)
-        c++ -o "$file" "$1"
-        }
-
-# asm: print asm to stdout
-function asm() {
-    ${CC} -S $1 -o /dev/stdout | grep -v '\.'
+        ${CXX} -o "$file" "$1"
         }
 
 # go back n directories

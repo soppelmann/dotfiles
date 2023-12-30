@@ -17,15 +17,15 @@ function is_vim_running {
   jobs | grep -o 'vim' &> /dev/null
 }
 
-function is_direnv_dir {
-  [[ -n "${DIRENV_DIR}" ]]
-}
+#function is_direnv_dir {
+#  [[ -n "${DIRENV_DIR}" ]]
+#}
 
 # Disable console start/stop: makes ^S and ^Q go through
 stty -ixon
 
 ## Load direnv
-has_program direnv && eval "$(direnv hook bash)"
+# has_program direnv && eval "$(direnv hook bash)"
 
 ## Utilities
 
@@ -274,8 +274,8 @@ function tat {
 
   if tmux ls 2>&1 | grep "$name"; then
     tmux attach -t "$name"
-  elif [ -f .envrc ]; then
-    direnv exec / tmux new-session -s "$name"
+  #elif [ -f .envrc ]; then
+  #  direnv exec / tmux new-session -s "$name"
   else
     tmux new-session -s "$name"
   fi
