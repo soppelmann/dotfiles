@@ -115,9 +115,9 @@ setopt noclobber                     # halp me
 setopt nohup                         # don't kill things when i logout
 setopt print_exit_value              # i want to know if something went wrong
 HISTFILE=~/.HISTFILE
-HISTSIZE=10000
-SAVEHIST=10000
-HISTSIZE=10000
+HISTSIZE=100000000
+SAVEHIST=100000000
+HISTSIZE=100000000
 TMOUT=0                              # don't auto logout
 
 # i am frequently too quick to logout with control+d twice (one to exit ssh,
