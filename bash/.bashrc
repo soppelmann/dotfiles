@@ -30,8 +30,8 @@ stty -ixon
 ## Utilities
 
 
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
+export CC=clang
+export CXX=clang++
 # export CFLAGS='-Wall -Werror -Wextra'
 
 # asm: print asm to stdout
@@ -42,7 +42,7 @@ function asm() {
 # ccc: cc with filename
 function ccc() {
     file=$(basename "$1" .c)
-        ${CC} ${CFLAGS} -o "$file" "$1"
+        ${CC} -o "$file" "$1"
         }
 
 function cxx() {
@@ -282,3 +282,4 @@ function tat {
 }
 
 bind 'set completion-ignore-case on'
+. "$HOME/.cargo/env"

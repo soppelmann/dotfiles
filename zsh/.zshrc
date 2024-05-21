@@ -166,6 +166,10 @@ dfupload() {
     scp $1 getz@smocke.df.lth.se:~/UPLOADS/
 }
 
+week() {
+    curl --silent https://vecka.nu 2>&1 | grep 'week =' | sed 's/[^0-9]//g'
+}
+
 # os-specific tweaks
 
 export STORE_LASTDIR=1
@@ -328,3 +332,4 @@ function tat {
 # setup ctrl + arrows
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
