@@ -34,6 +34,8 @@ if [[ $OSTYPE = darwin* ]]; then
     source ~/.config/powerlevel10k/powerlevel10k.zsh-theme
     source ~/.config/powerlevel10k/p10k.zsh
 
+    #nix
+    source ~/.config/zsh/plugins/nix-shell.plugin.zsh
 
     #profiling
     #zprof
