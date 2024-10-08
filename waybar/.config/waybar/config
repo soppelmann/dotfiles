@@ -26,6 +26,7 @@
         "hyprland/window"
     ],
     "modules-right": [
+        "custom/wofi",
         "memory",
         "cpu",
         "hyprland/language",
@@ -33,6 +34,7 @@
         "clock#date",
         "clock#time",
         "tray",
+        "custom/touchkbd"
     ],
 
 
@@ -79,6 +81,17 @@
           "warning": 70,
           "critical": 90
         }
+    },
+    
+    "custom/wofi": {
+      "format": "<span font='16'></span>", // Icon: keyboard
+      "on-click": "wofi --show=drun"
+    },
+
+    "custom/touchkbd": {
+      "format": "<span font='16'></span>", // Icon: keyboard
+      //"format": "",
+      "on-click": "pkill -SIGUSR1 wvkbd-mobintl"
     },
 
     "custom/keyboard-layout": {
