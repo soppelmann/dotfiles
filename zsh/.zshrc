@@ -165,7 +165,7 @@ upload() {
 
 dfupload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    scp $1 getz@smocke.df.lth.se:~/UPLOADS/
+    scp $1 getz@elaine.df.lth.se:~/UPLOADS/
 }
 
 week() {
@@ -216,7 +216,7 @@ export CXX=/usr/bin/clang++
 # export CFLAGS='-Wall -Werror -Wextra'
 # asm: print asm to stdout
 function asm() {
-    ${CC} ${CFLAGS} -S "$1" -o /dev/stdout | grep -v '\.'
+    ${CC} ${CFLAGS} -O3 -S "$1" -o /dev/stdout | grep -v '\.'
         }
 
 # ccc: cc with filename
@@ -252,7 +252,7 @@ function b {
 function ex {
     if [ -f $1 ] ; then
       case $1 in
-        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.bz2)   tar xvf $1     ;;
         *.tar.gz)    tar xzf $1     ;;
         *.bz2)       bunzip2 $1     ;;
         *.rar)       unrar e $1     ;;
@@ -331,7 +331,12 @@ function tat {
   fi
 }
 
+alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
+
 # setup ctrl + arrows
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+export UVM_HOME="/Users/getz/Developer/UVM"
+export PATH="/Users/getz/.qlot/bin:$PATH"
 

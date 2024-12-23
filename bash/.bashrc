@@ -36,7 +36,7 @@ export CXX=clang++
 
 # asm: print asm to stdout
 function asm() {
-    ${CC} ${CFLAGS} -S "$1" -o /dev/stdout | grep -v '\.'
+    ${CC} -O3 ${CFLAGS} -S "$1" -o /dev/stdout | grep -v '\.'
         }
 
 # ccc: cc with filename
@@ -281,5 +281,6 @@ function tat {
   fi
 }
 
+alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
+
 bind 'set completion-ignore-case on'
-. "$HOME/.cargo/env"
