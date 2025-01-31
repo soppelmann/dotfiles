@@ -165,7 +165,7 @@ upload() {
 
 dfupload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    scp $1 getz@elaine.df.lth.se:~/UPLOADS/
+    scp $1 getz@iblis.df.lth.se:~/UPLOADS/
 }
 
 week() {
@@ -339,4 +339,7 @@ bindkey "^[[1;5D" backward-word
 
 export UVM_HOME="/Users/getz/Developer/UVM"
 export PATH="/Users/getz/.qlot/bin:$PATH"
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  source "$EAT_SHELL_INTEGRATION_DIR/zsh"
 

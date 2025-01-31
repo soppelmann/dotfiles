@@ -284,3 +284,8 @@ function tat {
 alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}"'
 
 bind 'set completion-ignore-case on'
+
+
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  source "$EAT_SHELL_INTEGRATION_DIR/bash"
