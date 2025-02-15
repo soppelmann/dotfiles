@@ -153,8 +153,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=1000000
+HISTFILESIZE=2000000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -285,7 +285,7 @@ alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}
 
 bind 'set completion-ignore-case on'
 
-
+[[ $INSIDE_EMACS == *,eat ]] && PS1='\[\e[34m\]\u@\h:\W$\[\e[0m\] '
 
 [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
   source "$EAT_SHELL_INTEGRATION_DIR/bash"
