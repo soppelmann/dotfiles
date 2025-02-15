@@ -285,7 +285,11 @@ alias fp='fzf --preview "bat --style=numbers --color=always --line-range :500 {}
 
 bind 'set completion-ignore-case on'
 
-[[ $INSIDE_EMACS == *,eat ]] && PS1='\[\e[34m\]\u@\h:\W$\[\e[0m\] '
+# [[ $INSIDE_EMACS == *,eat ]] && PS1='\[\e[34m\]\u@\h:\W$\[\e[0m\] '
 
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/bash"
+if [[ -n "$INSIDE_EMACS" ]]; then
+    PS1='\[\e[34m\]\u@\h:\W$\[\e[0m\] '
+fi
+
+# [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  # source "$EAT_SHELL_INTEGRATION_DIR/bash"

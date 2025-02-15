@@ -340,6 +340,6 @@ bindkey "^[[1;5D" backward-word
 export UVM_HOME="/Users/getz/Developer/UVM"
 export PATH="/Users/getz/.qlot/bin:$PATH"
 
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/zsh"
+# [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  # source "$EAT_SHELL_INTEGRATION_DIR/zsh"
 
