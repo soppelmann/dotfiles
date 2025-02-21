@@ -14,7 +14,7 @@ if [[ $OSTYPE = darwin* ]]; then
     #Add to path in /etc/paths
     export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
     #Matlab
-    alias matlab='/Applications/MATLAB_R2022a.app/bin/matlab -nodesktop -nosplash $*'
+    alias matlab='/Applications/MATLAB_R2024b.app/bin/matlab -nodesktop -nosplash $*'
     source ~/.config/zsh/plugins/nix-shell/nix-shell.plugin.zsh
     alias enablemamba='eval $__conda_setup'
     export PATH="/opt/homebrew/Caskroom/mambaforge/base/bin:$PATH"
@@ -302,6 +302,7 @@ function find_and_edit () {
   then
     return 1
   fi
+  # emacsclient -c $files
   vim $files
 }
 
