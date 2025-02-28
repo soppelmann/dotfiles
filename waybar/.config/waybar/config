@@ -49,15 +49,15 @@
             "critical": 15
         },
         // Connected to AC
-        "format": "  {icon}  {capacity}%", // Icon: bolt
+        "format": " {icon}   {capacity}%", // Icon: bolt
         // Not connected to AC
         "format-discharging": "{icon}  {capacity}%",
         "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
+            "  ", // Icon: battery-full
+            "  ", // Icon: battery-three-quarters
+            "  ", // Icon: battery-half
+            "  ", // Icon: battery-quarter
+            "  "  // Icon: battery-empty
         ],
         "tooltip": true
     },
@@ -84,13 +84,14 @@
     },
     
     "custom/wofi": {
-      "format": "<span font='16'></span>", // Icon: keyboard
+      //"format": "<span font='16'></span>",
+      "format": " ",
       "on-click": "wofi --show=drun"
     },
 
     "custom/touchkbd": {
-      "format": "<span font='16'></span>", // Icon: keyboard
-      //"format": "",
+      //"format": "<span font='16'></span>", // Icon: keyboard
+      "format": " ",
       "on-click": "pkill -SIGUSR1 wvkbd-mobintl"
     },
 
