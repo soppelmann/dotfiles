@@ -92,7 +92,7 @@
     "custom/touchkbd": {
       //"format": "<span font='16'></span>", // Icon: keyboard
       "format": " ",
-      "on-click": "pkill -SIGUSR1 wvkbd-mobintl"
+      "on-click": "pkill -SIGRTMIN wvkbd-mobintl"
     },
 
     "custom/keyboard-layout": {
