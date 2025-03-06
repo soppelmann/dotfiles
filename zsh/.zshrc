@@ -344,3 +344,4 @@ export PATH="/Users/getz/.qlot/bin:$PATH"
 # [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
   # source "$EAT_SHELL_INTEGRATION_DIR/zsh"
 
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
