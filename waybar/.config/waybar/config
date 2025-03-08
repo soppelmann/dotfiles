@@ -20,16 +20,20 @@
 
     "modules-left": [
         "hyprland/workspaces",
-        "hyprland/submap"
+        "sway/workspaces",
+        "hyprland/submap",
+        "sway/submap"
     ],
     "modules-center": [
-        "hyprland/window"
+        "hyprland/window",
+        "sway/window"
     ],
     "modules-right": [
         "custom/wofi",
         "memory",
         "cpu",
         "hyprland/language",
+        "sway/language",
         "battery",
         "clock#date",
         "clock#time",
