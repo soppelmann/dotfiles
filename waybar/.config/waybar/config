@@ -22,7 +22,7 @@
         "hyprland/workspaces",
         "sway/workspaces",
         "hyprland/submap",
-        "sway/submap"
+        "sway/mode"
     ],
     "modules-center": [
         "hyprland/window",
