@@ -7,7 +7,9 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod4
+set $mod Mod1
+# set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -32,9 +34,33 @@ exec wvkbd-mobintl --hidden -L 200
 exec dunst
 exec swayosd-server
 # exec swaybg -m tile -i /home/getz/Pictures/prairewind.png
-exec gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # for GTK3 apps
 exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
 exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
+exec gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+exec gsettings set org.gtk.Settings.FileChooser startup-mode cwd
+exec gsettings set org.gtk.gtk4.Settings.FileChooser startup-mode cwd
+exec gsettings set org.gnome.desktop.interface cursor-theme BreezeX-RosePine-Linux
+exec gsettings set org.gnome.desktop.interface icon-theme 'bloom-classic'
+exec gsettings set org.gnome.desktop.interface cursor-size 32
+
+exec gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # for GTK3 apps
+# env QT_QPA_PLATFORMTHEME,qt6ct   # for Qt apps
+exec  swayidle -w timeout 600 swaylock before-sleep swaylock
+
+# Triggers a short notification
+set $notify dunstify --timeout 1500
+
+# Set your laptop screen name
+set $laptop_screen 'eDP-1'
+
+# Clamshell mode or lock & sleep
+# This is a if/else statement: [ outputs_count == 1 ] && true || false
+bindswitch --reload --locked lid:on exec '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] || ($notify "Clamshell mode" "Laptop screen off" && swaymsg output $laptop_screen disable)'
+
+bindswitch --reload --locked lid:off output $laptop_screen enable
+
+
+
 ### Idle configuration
 #
 # Example configuration:
@@ -66,7 +92,6 @@ exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DES
 gaps inner 0
 gaps outer 0
 default_border pixel 1
-
 
 client.focused #ffffff #ffffff #ffffff #e88215
 client.focused_inactive #3b4252 #3b4252  #3b4252 #3b4252
