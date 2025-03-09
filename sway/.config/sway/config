@@ -4,11 +4,15 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+font pango:Triplicate T4c 11
+# font pango:Triplicate C4c 11
+# font pango:Berkeley Mono 11
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
-# set $mod Mod4
+# set $mod Mod1
+set $mod Mod4
 seat * hide_cursor when-typing enable
 seat * hide_cursor 8000
 # Home row direction keys, like vim
@@ -40,10 +44,9 @@ exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DES
 exec gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 exec gsettings set org.gtk.Settings.FileChooser startup-mode cwd
 exec gsettings set org.gtk.gtk4.Settings.FileChooser startup-mode cwd
-exec gsettings set org.gnome.desktop.interface cursor-theme BreezeX-RosePine-Linux
-exec gsettings set org.gnome.desktop.interface icon-theme 'bloom-classic'
-exec gsettings set org.gnome.desktop.interface cursor-size 32
-
+# exec gsettings set org.gnome.desktop.interface cursor-theme BreezeX-RosePine-Linux
+# exec gsettings set org.gnome.desktop.interface icon-theme 'bloom-classic'
+exec gsettings set org.gnome.desktop.interface cursor-size 18
 exec gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # for GTK3 apps
 # env QT_QPA_PLATFORMTHEME,qt6ct   # for Qt apps
 exec  swayidle -w timeout 600 swaylock before-sleep swaylock
@@ -94,9 +97,9 @@ gaps inner 0
 gaps outer 0
 default_border pixel 1
 
-
+#colors
 #client.<class> <border> <background> <text> [<indicator> [<child_border>]]
-client.focused #ffffff #000000 #ffffff #ffffff #ffffff
+client.focused #ffffff #000000 #ffffff #e88215 #ffffff
 client.focused_inactive #3b4252 #000000  #3b4252 #3b4252
 client.unfocused #3b4252 #000000  #3b4252 #3b4252
 client.urgent #434c5e #434c5e #434c5e #434c5e
@@ -119,31 +122,7 @@ input type:touchpad {
 bindgesture swipe:right workspace prev
 bindgesture swipe:left workspace next
 
-## Colours
-#set $base00 #282828
-#set $base01 #3c3836
-#set $base02 #504945
-#set $base03 #665c54
-#set $base04 #d5c4a1
-#set $base05 #ebdbb2
-#set $base06 #fbf1c7
-#set $base07 #ebdbb2
-#set $base08 #cc241d
-#set $base09 #d65d0e
-#set $base0A #d79921
-#set $base0B #98971a
-#set $base0C #458588
-#set $base0D #b16286
-#set $base0E #689d6a
-#set $base0F #a89984
-#
-### Window Colours
-#client.focused   $base0D  $base00  $base06  $base08  $base09
-#client.focused_inactive  $base02  $base00  $base06  $base08  $base02
-#client.unfocused   $base01  $base00  $base06  $base08  $base02
-#client.urgent   $base07  $base00  $base08  $base0B  $base02
-#client.placeholder       $base02  $base00  $base06  $base03  $base04
-#client.background        $base00
+
 
 ## sounds overlay
 # Sink volume raise optionally with --device
