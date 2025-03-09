@@ -7,8 +7,8 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-set $mod Mod1
-# set $mod Mod4
+# set $mod Mod1
+set $mod Mod4
 
 # Home row direction keys, like vim
 set $left h
@@ -164,6 +164,8 @@ bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
     # Start a terminal
     bindsym $mod+Return exec $term
 
+    bindsym $mod+Shift+l exec swaylock
+
     # Kill focused window
     bindsym $mod+Shift+q kill
 
@@ -197,15 +199,15 @@ bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    # bindsym $mod+Shift+$left move left
+    # bindsym $mod+Shift+$down move down
+    # bindsym $mod+Shift+$up move up
+    # bindsym $mod+Shift+$right move right
+    # # Ditto, with arrow keys
+    # bindsym $mod+Shift+Left move left
+    # bindsym $mod+Shift+Down move down
+    # bindsym $mod+Shift+Up move up
+    # bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
