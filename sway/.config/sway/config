@@ -7,9 +7,10 @@
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
-# set $mod Mod1
-set $mod Mod4
-
+set $mod Mod1
+# set $mod Mod4
+seat * hide_cursor when-typing enable
+seat * hide_cursor 8000
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -93,10 +94,14 @@ gaps inner 0
 gaps outer 0
 default_border pixel 1
 
-client.focused #ffffff #ffffff #ffffff #e88215
-client.focused_inactive #3b4252 #3b4252  #3b4252 #3b4252
-client.unfocused #3b4252 #3b4252  #3b4252 #3b4252
+
+#client.<class> <border> <background> <text> [<indicator> [<child_border>]]
+client.focused #ffffff #000000 #ffffff #ffffff #ffffff
+client.focused_inactive #3b4252 #000000  #3b4252 #3b4252
+client.unfocused #3b4252 #000000  #3b4252 #3b4252
 client.urgent #434c5e #434c5e #434c5e #434c5e
+client.focused_tab_title #ffffff #000000 #ffffff #ffffff
+
 
 input type:keyboard {
     xkb_layout us,gb,se
