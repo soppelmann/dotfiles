@@ -171,11 +171,11 @@ __git_files () {
 
 # envs.sh file service
 mirror() {
-    curl -F "url=$1" https://envs.sh/
+    curl -F "url=$1" https://0x0.st/
 }
 upload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    curl -F $a https://envs.sh/
+    curl -F $a https://0x0.st/
 }
 
 dfupload() {
