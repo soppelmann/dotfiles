@@ -128,11 +128,11 @@ function find_and_edit () {
 
 # envs.sh file service
 function mirror() {
-    curl -F "url=$1" https://0x0.st/
+    curl -F "url=$1" https://envs.sh/
 }
 function upload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    curl -F $a https://0x0.st/
+    curl -F $a https://envs.sh/
 }
 dfupload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
