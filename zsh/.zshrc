@@ -40,7 +40,7 @@ if [[ $OSTYPE = darwin* ]]; then
     export CXX=/usr/bin/clang++
 
     # ruby enable
-    eval "$(rbenv init - zsh)"
+    #eval "$(rbenv init - zsh)"
 
     # opam configuration
     [[ ! -r /Users/getz/.opam/opam-init/init.zsh ]] || source /Users/getz/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
