@@ -19,20 +19,23 @@
     "height": 30,
 
     "modules-left": [
-        "hyprland/workspaces",
+        "niri/workspaces",
+  //      "wlr/taskbar",
+        "wlr/workspaces",
         "sway/workspaces",
-        "hyprland/submap",
         "sway/mode"
     ],
     "modules-center": [
-        "hyprland/window",
+        "niri/window",
+        "wlr/window",
         "sway/window"
     ],
     "modules-right": [
         "custom/wofi",
         "memory",
         "cpu",
-        "hyprland/language",
+        "pulseaudio",
+        "niri/language",
         "sway/language",
         "battery",
         "clock#date",

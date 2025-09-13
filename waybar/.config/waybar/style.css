@@ -51,12 +51,16 @@
     background: #000000;
     color: white;
     font-family: Triplicate T4c;
-    font-family: Berkeley Mono;
-    font-size: 11px;
+    /*font-family: Berkeley Mono;*/
+    font-size: 12px;
 }
 
 /* Each module */
-#battery,
+#battery {
+ 
+    padding-left: 10px;
+    padding-right: 0px;
+}
 #clock,
 #cpu,
 #custom-keyboard-layout,
@@ -82,22 +86,22 @@
 }
 
 #battery.warning {
+    background: #000000;
     color: orange;
 }
 
 #battery.critical {
     color: red;
 }
-
+/*
 #battery.warning.discharging {
-    animation-name: blink-warning;
     animation-duration: 3s;
 }
 
 #battery.critical.discharging {
-    animation-name: blink-critical;
     animation-duration: 2s;
 }
+*/
 
 #clock {
     font-weight: bold;

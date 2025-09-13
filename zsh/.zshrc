@@ -72,7 +72,7 @@ export TERM=xterm-256color
 export BLOCKSIZE=1k
 export CVS_RSH=/usr/bin/ssh
 export IRCNAME="*Unknown*"
-export LESS="-i"
+export LESS="-iR"
 export MYSQL_HISTFILE=/dev/null
 export NO_COLOR=1
 #export SSH_ASKPASS_REQUIRE=prefer
@@ -361,3 +361,9 @@ export PATH="/Users/getz/.qlot/bin:$PATH"
   # source "$EAT_SHELL_INTEGRATION_DIR/zsh"
 
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
+
+
+if [ -f ~/.zsh.tailscale ]; then
+    source ~/.zsh.tailscale
+fi
+

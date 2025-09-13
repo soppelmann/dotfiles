@@ -13,6 +13,8 @@ font pango:Triplicate T4c 11
 # Logo key. Use Mod1 for Alt.
 # set $mod Mod1
 set $mod Mod4
+
+seat * xcursor_theme Adwaita 24
 seat * hide_cursor when-typing enable
 seat * hide_cursor 8000
 # Home row direction keys, like vim
@@ -21,7 +23,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term kitty
+set $term foot
 # Your preferred application launcher
 set $menu wofi --show drun
 
@@ -37,8 +39,12 @@ set $menu wofi --show drun
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 exec wvkbd-mobintl --hidden -L 200
 exec dunst
-exec swayosd-server
-# exec swaybg -m tile -i /home/getz/Pictures/prairewind.png
+#exec swaybg -c #223322
+#exec swaybg -c eae5ce
+#exec swaybg -c #F6B992
+exec swaybg -c 00585E
+#exec swaybg -c #7E9288
+#exec swaybg -m tile -i /home/getz/Pictures/prairewind.png
 exec dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
 exec systemctl --user import-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME
 exec gsettings set org.gnome.desktop.interface color-scheme prefer-dark
@@ -46,16 +52,17 @@ exec gsettings set org.gtk.Settings.FileChooser startup-mode cwd
 exec gsettings set org.gtk.gtk4.Settings.FileChooser startup-mode cwd
 # exec gsettings set org.gnome.desktop.interface cursor-theme BreezeX-RosePine-Linux
 # exec gsettings set org.gnome.desktop.interface icon-theme 'bloom-classic'
-exec gsettings set org.gnome.desktop.interface cursor-size 18
+exec gsettings set org.gnome.desktop.interface cursor-size 24
 exec gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"   # for GTK3 apps
 # env QT_QPA_PLATFORMTHEME,qt6ct   # for Qt apps
-exec  swayidle -w timeout 600 swaylock before-sleep swaylock
+exec swayidle -w timeout 600 swaylock before-sleep swaylock
 
 # Triggers a short notification
 set $notify dunstify --timeout 1500
 
 # Set your laptop screen name
 set $laptop_screen 'eDP-1'
+output $laptop_screen scale 1.7
 
 # Clamshell mode or lock & sleep
 # This is a if/else statement: [ outputs_count == 1 ] && true || false
@@ -63,36 +70,8 @@ bindswitch --reload --locked lid:on exec '[ $(swaymsg -t get_outputs | grep name
 
 bindswitch --reload --locked lid:off output $laptop_screen enable
 
-
-
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-
-### Input configuration
-#
-# Example configuration:
-#
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
-#
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
-
-
+#gaps inner 15
+#gaps outer 5
 gaps inner 0
 gaps outer 0
 default_border pixel 1
@@ -107,9 +86,11 @@ client.focused_tab_title #ffffff #000000 #ffffff #ffffff
 
 
 input type:keyboard {
-    xkb_layout us,gb,se
-    xkb_options grp:alt_shift_toggle,caps:backspace
+    xkb_layout us,se
+    xkb_options grp:alt_space_toggle,caps:backspace,ctrl:nocaps
 }
+
+bindsym Alt+Space exec notify-send -a "Layout" "$(swaymsg -t get_inputs | jq -r '.[] | select(.identifier == "1:1:AT_keyboard") | .xkb_active_layout_name')" 
 
 input type:touchpad {
        dwt enabled
@@ -122,22 +103,20 @@ input type:touchpad {
 bindgesture swipe:right workspace prev
 bindgesture swipe:left workspace next
 
-
-
 ## sounds overlay
 # Sink volume raise optionally with --device
-bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
+#bindsym XF86AudioRaiseVolume exec swayosd-client --output-volume raise
 # Sink volume lower optionally with --device
-bindsym XF86AudioLowerVolume exec swayosd-client --output-volume lower
+#bindsym XF86AudioLowerVolume exec swayosd-client --output-volume lower
 # Sink volume toggle mute
-bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
+#bindsym XF86AudioMute exec swayosd-client --output-volume mute-toggle
 # Source volume toggle mute
-bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
+#bindsym XF86AudioMicMute exec swayosd-client --input-volume mute-toggle
 
 # Brightness raise with custom value('+' sign needed)
-bindsym XF86MonBrightnessUp  exec swayosd-client --brightness +5
+#bindsym XF86MonBrightnessUp  exec swayosd-client --brightness +5
 # Brightness lower with custom value('-' sign needed)
-bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
+#bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
 
 
 
@@ -148,7 +127,7 @@ bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
     # Start a terminal
     bindsym $mod+Return exec $term
 
-    bindsym $mod+Shift+l exec swaylock
+    bindsym $mod+Control+l exec swaylock
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -183,15 +162,15 @@ bindsym XF86MonBrightnessDown exec swayosd-client --brightness -5
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    # bindsym $mod+Shift+$left move left
-    # bindsym $mod+Shift+$down move down
-    # bindsym $mod+Shift+$up move up
-    # bindsym $mod+Shift+$right move right
-    # # Ditto, with arrow keys
-    # bindsym $mod+Shift+Left move left
-    # bindsym $mod+Shift+Down move down
-    # bindsym $mod+Shift+Up move up
-    # bindsym $mod+Shift+Right move right
+     bindsym $mod+Shift+$left move left
+     bindsym $mod+Shift+$down move down
+     bindsym $mod+Shift+$up move up
+     bindsym $mod+Shift+$right move right
+     # Ditto, with arrow keys
+     bindsym $mod+Shift+Left move left
+     bindsym $mod+Shift+Down move down
+     bindsym $mod+Shift+Up move up
+     bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
@@ -284,13 +263,19 @@ bindsym $mod+r mode "resize"
 # Utilities:
 #
     # Special keys to adjust volume via PulseAudio
+    #bindsym --locked XF86AudioMute exec mixer vol.mute=toggle
+    #bindsym --locked XF86AudioLowerVolume exec mixer vol=-10%
+    #bindsym --locked XF86AudioRaiseVolume exec mixer vol=+10%
+    #bindsym --locked XF86AudioMicMute exec mixer rec.mute=toggle
+    
     bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    #bindsym --locked XF86MonBrightnessDown exec backlight - 10
+    bindsym --locked XF86MonBrightnessDown exec notify-send down
+    bindsym --locked XF86MonBrightnessUp exec backlight + 10
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
