@@ -40,7 +40,7 @@ set $menu wofi --show drun
 exec wvkbd-mobintl --hidden -L 200
 exec dunst
 #exec swaybg -c #223322
-#exec swaybg -c eae5ce
+#exec swaybg -c #eae5ce
 #exec swaybg -c #F6B992
 exec swaybg -c 00585E
 #exec swaybg -c #7E9288
