@@ -118,6 +118,7 @@ alias ph="ps auwwx | head"
 alias pg="ps auwwx | grep -i -e ^USER -e "
 alias publicip="curl -s http://ifconfig.me "
 alias rg="rg --color=never -N -z"
+alias shitssh='ssh -oKexAlgorithms=+diffie-hellman-group1-sha1 -c 3des-cbc,aes256-ctr'
 
 # when i say vi i mean vim (if it's installed)
 if [ -x "`which vim`" ]; then
