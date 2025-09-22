@@ -37,8 +37,11 @@ set $menu wofi --show drun
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-exec wvkbd-mobintl --hidden -L 200
+
+# exec wvkbd-mobintl --hidden -L 200
 exec dunst
+exec ~/.config/sway/titlebar.sh
+
 #exec swaybg -c #223322
 #exec swaybg -c #eae5ce
 #exec swaybg -c #F6B992
@@ -70,8 +73,8 @@ bindswitch --reload --locked lid:on exec '[ $(swaymsg -t get_outputs | grep name
 
 bindswitch --reload --locked lid:off output $laptop_screen enable
 
-#gaps inner 15
-#gaps outer 5
+# gaps inner 15
+# gaps outer 5
 gaps inner 0
 gaps outer 0
 default_border pixel 1
