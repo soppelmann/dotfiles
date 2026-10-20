@@ -1,0 +1,44 @@
+# opens iTerm2
+#alt - return : "${HOME}"/.config/yabai/scripts/open_iterm2.sh
+#alt - return : open -a iTerm
+alt - return : open -n /Applications/Ghostty.app
+#alt - return : /Applications/kitty.app/Contents/MacOS/kitty --single-instance -d ~
+
+
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# Change desktop
+alt - 1 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 1
+alt - 2 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 2
+alt - 3 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 3
+alt - 4 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 4
+alt - 5 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 5
+alt - 6 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 6
+alt - 7 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 7
+alt - 8 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 8
+alt - 9 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 9
+
+# Move window
+shift + alt - 1 : yabai -m window --space 1;
+shift + alt - 2 : yabai -m window --space 2; 
+shift + alt - 3 : yabai -m window --space 3; 
+shift + alt - 4 : yabai -m window --space 4; 
+shift + alt - 5 : yabai -m window --space 5; 
+shift + alt - 6 : yabai -m window --space 6; 
+
+# Fullscreen window
+#alt - f : yabai -m window --toggle native-fullscreen
+
+
+# Restart Yabai
+shift + lctrl + alt - r : \
+    /usr/bin/env osascript <<< \
+        "display notification \"Restarting Yabai\" with title \"Yabai\""; \
+    launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+
+# Make window native fullscreen
+alt - f         : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen

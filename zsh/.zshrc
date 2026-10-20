@@ -36,8 +36,8 @@ if [[ $OSTYPE = darwin* ]]; then
 
 
     #C++ clang path
-    export CC=/usr/bin/clang
-    export CXX=/usr/bin/clang++
+    #export CC=/usr/bin/clang
+    #export CXX=/usr/bin/clang++
 
     # ruby enable
     #eval "$(rbenv init - zsh)"
@@ -173,16 +173,16 @@ __git_files () {
 
 # envs.sh file service
 mirror() {
-    curl -F "url=$1" https://envs.sh/
+    curl -F "url=$1" https://x0.at/
 }
 upload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    curl -F $a https://envs.sh/
+    curl -F $a https://x0.at/
 }
 
 dfupload() {
     if [[ -z $1 ]]; then a="file=@-"; else a="file=@$1"; fi
-    scp $1 getz@iblis.df.lth.se:~/UPLOADS/
+    scp $1 getz@100.115.102.102:~/UPLOADS/
 }
 
 week() {
@@ -227,8 +227,10 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=
 
 autoload -Uz compinit && compinit
 
-export CC=/usr/bin/clang
-export CXX=/usr/bin/clang++
+#export CC=/usr/bin/clang
+#export CXX=/usr/bin/clang++
+export CC=clang
+
 
 # export CFLAGS='-Wall -Werror -Wextra'
 # asm: print asm to stdout
@@ -339,7 +341,6 @@ fi
 # tat: tmux attach
 function tat {
   name=$(basename `pwd` | sed -e 's/\.//g')
-
   if tmux ls 2>&1 | grep "$name"; then
     tmux attach -t "$name"
   elif [ -f .envrc ]; then
@@ -357,6 +358,7 @@ bindkey "^[[1;5D" backward-word
 
 export UVM_HOME="/Users/getz/Developer/UVM"
 export PATH="/Users/getz/.qlot/bin:$PATH"
+export PATH="/Users/getz/.cargo/bin:$PATH"
 
 # [ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
   # source "$EAT_SHELL_INTEGRATION_DIR/zsh"
@@ -368,3 +370,8 @@ if [ -f ~/.zsh.tailscale ]; then
     source ~/.zsh.tailscale
 fi
 
+#export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
+#export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
+
+#export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
