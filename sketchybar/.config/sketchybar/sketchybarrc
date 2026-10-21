@@ -46,6 +46,22 @@ sketchybar --default icon.font="$ICON_FONT:Regular:13.0" \
                      padding_right=10 \
                      background.corner_radius=0
 
+# Popups: black box, 1px white border, square corners
+POPUP=(
+  popup.align=right
+  popup.background.color=$BLACK
+  popup.background.border_color=$WHITE
+  popup.background.border_width=1
+  popup.background.corner_radius=0
+)
+
+# A row inside a popup
+ROW=(
+  icon.drawing=off
+  padding_left=10
+  padding_right=10
+)
+
 # -----------------------------------------------------------------------------
 # Left: workspaces + window title
 # -----------------------------------------------------------------------------
@@ -89,31 +105,51 @@ sketchybar --add item date right \
            --set date update_freq=10 \
                       icon=􀉉 \
                       label.font="$FONT:Bold:13.0" \
-                      script="$PLUGIN_DIR/date.sh"
+                      script="$PLUGIN_DIR/date.sh" \
+                      click_script="open -a Calendar"
 
+# Left click: details popup, right click: battery settings
 sketchybar --add item battery right \
            --set battery update_freq=10 \
+                         "${POPUP[@]}" \
                          script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery power_source_change system_woke
+           --subscribe battery power_source_change system_woke \
+                               mouse.clicked mouse.exited.global
 
+for row in status remaining; do
+  sketchybar --add item battery.$row popup.battery \
+             --set battery.$row "${ROW[@]}"
+done
+
+sketchybar --add item battery.settings popup.battery \
+           --set battery.settings "${ROW[@]}" \
+                                  label="Battery settings..." \
+                                  click_script="open 'x-apple.systempreferences:com.apple.Battery-Settings.extension'; sketchybar --set battery popup.drawing=off"
+
+# Click: switch to the next keyboard layout
 sketchybar --add event input_change AppleSelectedInputSourcesChangedNotification \
            --add item language right \
            --set language icon=􀇳 \
                           script="$PLUGIN_DIR/language.sh" \
-           --subscribe language input_change
+           --subscribe language input_change mouse.clicked
 
+# Left click: output device popup, right click: mute, scroll: volume
 sketchybar --add item volume right \
-           --set volume script="$PLUGIN_DIR/volume.sh" \
-           --subscribe volume volume_change
+           --set volume "${POPUP[@]}" \
+                        script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change mouse.clicked mouse.scrolled \
+                              mouse.exited.global
 
 sketchybar --add item cpu right \
            --set cpu update_freq=5 \
                      icon=􀧓 \
-                     script="$PLUGIN_DIR/cpu.sh"
+                     script="$PLUGIN_DIR/cpu.sh" \
+                     click_script="open -a 'Activity Monitor'"
 
 sketchybar --add item memory right \
            --set memory update_freq=5 \
                         icon=􀫦 \
-                        script="$PLUGIN_DIR/memory.sh"
+                        script="$PLUGIN_DIR/memory.sh" \
+                        click_script="open -a 'Activity Monitor'"
 
 sketchybar --update
