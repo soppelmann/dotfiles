@@ -1,0 +1,74 @@
+# =============================================================================
+#
+# Ghostty configuration
+#
+# Configuration reference: https://ghostty.org/docs/config/reference
+#
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Font
+# -----------------------------------------------------------------------------
+
+font-family = Triplicate T4c
+# font-family = Berkeley Mono
+font-size = 15
+
+# -----------------------------------------------------------------------------
+# Window
+# -----------------------------------------------------------------------------
+
+window-theme = dark
+window-padding-x = 6
+window-padding-y = 6
+window-padding-color = background
+macos-titlebar-style = tabs
+background-opacity = 1
+
+# -----------------------------------------------------------------------------
+# Cursor and mouse
+# -----------------------------------------------------------------------------
+
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+
+# -----------------------------------------------------------------------------
+# Colors: white on black, vivid palette
+# -----------------------------------------------------------------------------
+
+background = #000000
+foreground = #ffffff
+
+cursor-color = #ffffff
+cursor-text = #000000
+
+selection-background = #ffffff
+selection-foreground = #000000
+
+# black
+palette = 0=#000000
+palette = 8=#767676
+# red
+palette = 1=#ff2e2e
+palette = 9=#ff5f5f
+# green
+palette = 2=#22e000
+palette = 10=#5fff3a
+# yellow
+palette = 3=#ffd500
+palette = 11=#ffff3a
+# blue
+palette = 4=#2a8cff
+palette = 12=#5fafff
+# magenta
+palette = 5=#e040fb
+palette = 13=#ff6bff
+# cyan
+palette = 6=#00d7d7
+palette = 14=#4dffff
+# white
+palette = 7=#d0d0d0
+palette = 15=#ffffff
