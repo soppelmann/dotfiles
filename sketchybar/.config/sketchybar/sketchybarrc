@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+
+# =============================================================================
+#
+# Sketchybar configuration (port of waybar/spacebar config)
+#
+# Configuration reference: https://felixkratz.github.io/SketchyBar/config/bar
+#
+# =============================================================================
+
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+BLACK=0xff000000
+WHITE=0xffffffff
+TRANSPARENT=0x00000000
+
+FONT="Berkeley Mono"
+ICON_FONT="SF Pro"
+
+HEIGHT=32
+
+# -----------------------------------------------------------------------------
+# Bar
+# -----------------------------------------------------------------------------
+
+sketchybar --bar position=top \
+                 height=$HEIGHT \
+                 color=$BLACK \
+                 border_width=0 \
+                 corner_radius=0 \
+                 blur_radius=0 \
+                 shadow=off \
+                 padding_left=10 \
+                 padding_right=10 \
+                 display=all
+
+sketchybar --default icon.font="$ICON_FONT:Regular:13.0" \
+                     icon.color=$WHITE \
+                     label.font="$FONT:Regular:13.0" \
+                     label.color=$WHITE \
+                     icon.padding_left=0 \
+                     icon.padding_right=6 \
+                     label.padding_left=0 \
+                     label.padding_right=0 \
+                     padding_left=10 \
+                     padding_right=10 \
+                     background.corner_radius=0
+
+# -----------------------------------------------------------------------------
+# Left: workspaces + window title
+# -----------------------------------------------------------------------------
+
+# Focused space gets a 2px white line along the top, like waybar
+for sid in 1 2 3 4 5 6 7 8 9; do
+  sketchybar --add space space.$sid left \
+             --set space.$sid space=$sid \
+                              icon=$sid \
+                              icon.font="$FONT:Regular:13.0" \
+                              icon.padding_left=10 \
+                              icon.padding_right=10 \
+                              label.drawing=off \
+                              padding_left=0 \
+                              padding_right=0 \
+                              background.color=$TRANSPARENT \
+                              background.height=2 \
+                              background.y_offset=$((HEIGHT / 2 - 1)) \
+                              script="$PLUGIN_DIR/space.sh" \
+                              click_script="osascript -e 'tell application \"System Events\" to key code $((17 + sid)) using control down'"
+done
+
+sketchybar --add item front_app left \
+           --set front_app icon.drawing=off \
+                           label.font="$FONT:Bold:13.0" \
+                           padding_left=20 \
+                           script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
+
+# -----------------------------------------------------------------------------
+# Right (items are added right to left)
+# -----------------------------------------------------------------------------
+
+sketchybar --add item time right \
+           --set time update_freq=1 \
+                      icon.drawing=off \
+                      label.font="$FONT:Bold:13.0" \
+                      script="$PLUGIN_DIR/time.sh"
+
+sketchybar --add item date right \
+           --set date update_freq=10 \
+                      icon=􀉉 \
+                      label.font="$FONT:Bold:13.0" \
+                      script="$PLUGIN_DIR/date.sh"
+
+sketchybar --add item battery right \
+           --set battery update_freq=10 \
+                         script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery power_source_change system_woke
+
+sketchybar --add event input_change AppleSelectedInputSourcesChangedNotification \
+           --add item language right \
+           --set language icon=􀇳 \
+                          script="$PLUGIN_DIR/language.sh" \
+           --subscribe language input_change
+
+sketchybar --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+
+sketchybar --add item cpu right \
+           --set cpu update_freq=5 \
+                     icon=􀧓 \
+                     script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --add item memory right \
+           --set memory update_freq=5 \
+                        icon=􀫦 \
+                        script="$PLUGIN_DIR/memory.sh"
+
+sketchybar --update
