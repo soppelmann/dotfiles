@@ -189,6 +189,24 @@ week() {
     curl --silent https://vecka.nu 2>&1 | grep 'week =' | sed 's/[^0-9]//g'
 }
 
+flaccrc() {
+  local f
+  local -a files
+  files=("$@")
+  (( $#files )) || files=(*.flac(N))
+  (( $#files )) || { print -u2 "flaccrc: no .flac files found"; return 1 }
+
+  for f in $files; do
+    printf '%s: ' "$f"
+    flac -dcs --force-raw-format --endian=little --sign=signed "$f" | \
+      python3 -c 'import sys,zlib
+c=0
+for b in iter(lambda: sys.stdin.buffer.read(1<<20), b""): c=zlib.crc32(b,c)
+print("%08X" % c)'
+  done
+}
+
+
 # os-specific tweaks
 
 export STORE_LASTDIR=1
